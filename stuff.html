@@ -1,0 +1,34 @@
+
+# Optional argument; multi-line description.
+opts.on("-i", "--inplace [EXTENSION]",
+        "Edit ARGV files in place",
+        "  (make backup if EXTENSION supplied)") do |ext|
+  options.inplace = true
+  options.extension = ext || ''
+  options.extension.sub!(/A.?(?=.)/, ".")  # Ensure extension begins with dot.
+        end
+</pre>
+<p>For more details your can see <a href="http://ruby.about.com/od/advancedruby/a/optionparser.htm">this article</a> and refer the <a href="http://ruby-doc.org/stdlib/libdoc/optparse/rdoc/classes/OptionParser.html">Ruby rdoc</a>.</p>
+<p>Benefit of <code>OptionParser</code> is: we don’t need to use array index to retrieve options and we can write help text along with option definition.</p>
+<p>Disadvantage of <code>OptionParser</code> is: since different commands need using the same option parser, you cannot define different option parsers for different commands. To solve this problem, you can resort to <code>Thor</code>.</p>
+<h4>Using Thor</h4>
+<p>As you know <a href="https://www.github.com/wycats/thor">Thor</a> is a replacement of Rake. Let’s see how we use <code>Thor</code> to refactor our command-line tool.</p>
+<pre>require 'rubygems'
+require 'thor'
+
+class ThorExample &lt; Thor
+  desc "start", "start server"
+  method_option :environment,:default =&gt; "development", :aliases =&gt; "-e",
+:desc =&gt; "which environment you want server run."
+  method_option :daemon, :type =&gt; :boolean, :default =&gt; false, :aliases =&gt; "-d",
+:desc =&gt; "running on daemon mode?"
+  def start
+    puts "start #{options.inspect}"
+  end
+
+  desc "stop" ,"stop server"
+  method_option :delay,  :default =&gt; 0, :aliases =&gt; "-w",
+:desc =&gt; "wait server finish it's job"
+  def stop
+    puts "stop"
+  end
