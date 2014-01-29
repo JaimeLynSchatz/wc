@@ -17,6 +17,12 @@ File.open( ARGV[0]? ARGV[0] : 'default.txt', 'r' ) do |f1|
   end
 end
 
+# I left off here: (.*<body>)(<.*?>)(<.*>)
+# see the website rubular.com to see how it works
+# it's capturing the stuff in the middle but I need
+# to get the expression to leave the middle text alone
+# I'll muddle on it and work it out
+
 #words = input_text.split(" ")
 #word_count = {}
 
