@@ -3,7 +3,8 @@ input_text = "The quick brown fox jumped over the lazy dog. And then the sun sho
 word_count = {}
 File.open( ARGV[0]? ARGV[0] : 'default.txt', 'r' ) do |f1|
   while line = f1.gets
-    words = line.split(" ")
+    tagless_line = line.gsub( %r[<.*?>]im, " ")
+    words = tagless_line.split(" ")
 
     words.each do |word|
       word = word.downcase
