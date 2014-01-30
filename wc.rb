@@ -17,7 +17,11 @@ File.open( ARGV[0]? ARGV[0] : 'default.txt', 'r' ) do |f1|
   end
 end
 
-# I left off here: (.*<body>)(<.*?>)(<.*>)
+# I left off here: 
+# there's more on nettuts+, too
+# (?<=\<[a-z])\w+ uses a lookbehind to make sure
+# there's a bracket with a letter before it - but doesn't include the bracket and the letter
+# I'm very very close - just not here yet.
 # see the website rubular.com to see how it works
 # it's capturing the stuff in the middle but I need
 # to get the expression to leave the middle text alone
